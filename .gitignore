@@ -9,6 +9,9 @@ data/
 # 生成された音声ファイル
 public/audio/
 
+# BGM
+public/bgm/
+
 # 動画ごとの背景素材（sharedは除く）
 public/backgrounds/*
 !public/backgrounds/shared/

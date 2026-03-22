@@ -1,7 +1,7 @@
 import React from "react";
 import { AbsoluteFill, Audio, Series, staticFile } from "remotion";
 import { z } from "zod";
-import { calculateLineDurationInFrames } from "../utils/timing";
+import { calculateLineDurationInFrames, FPS } from "../utils/timing";
 import { Background } from "./Background";
 import { Subtitle } from "./Subtitle";
 import { Zundamon } from "./Zundamon";
@@ -51,7 +51,7 @@ interface Segment {
   totalFrames: number;
 }
 
-function groupIntoSegments(allLines: Line[]): Segment[] {
+export function groupIntoSegments(allLines: Line[]): Segment[] {
   const segments: Segment[] = [];
 
   for (const line of allLines) {
@@ -70,6 +70,19 @@ function groupIntoSegments(allLines: Line[]): Segment[] {
     }
   }
 
+  // 動画背景のセグメントで、動画の方が音声合計より長い場合は動画に合わせる
+  for (const segment of segments) {
+    if (segment.background.type === "video") {
+      const videoDuration = segment.lines[0].videoDurationInSeconds;
+      if (videoDuration) {
+        const videoFrames = Math.ceil(videoDuration * FPS);
+        if (videoFrames > segment.totalFrames) {
+          segment.totalFrames = videoFrames;
+        }
+      }
+    }
+  }
+
   return segments;
 }
 
@@ -81,17 +94,20 @@ export const ZundamonVideo: React.FC<ZundamonVideoProps> = ({ script }) => {
 
   return (
     <AbsoluteFill style={{ backgroundColor: "#000" }}>
+      {/* BGM: 動画全体で再生（Seriesの外に置いて途切れを防ぐ） */}
+      <Audio src={staticFile("bgm/bgm.mp3")} volume={0.05} />
+
       <Series>
         {segments.map((segment) => {
           const key = `seg-${segmentIndex++}`;
           return (
-            <Series.Sequence
-              key={key}
-              durationInFrames={segment.totalFrames}
-            >
+            <Series.Sequence key={key} durationInFrames={segment.totalFrames}>
               <AbsoluteFill>
                 {/* 背景: セグメント全体で1つだけレンダリング（動画が途切れない） */}
                 <Background source={segment.background} />
+
+                {/* ずんだもん: セグメント全体で表示し続ける（口パクは音声がないと閉じる） */}
+                <Zundamon audioDurationInSeconds={0} />
 
                 {/* セリフ: セグメント内でSeriesで切り替え */}
                 <Series>
@@ -101,7 +117,9 @@ export const ZundamonVideo: React.FC<ZundamonVideoProps> = ({ script }) => {
                       durationInFrames={calculateLineDurationInFrames(line)}
                     >
                       <Audio src={staticFile(line.audioFile)} />
-                      <Zundamon audioDurationInSeconds={line.audioDurationInSeconds} />
+                      <Zundamon
+                        audioDurationInSeconds={line.audioDurationInSeconds}
+                      />
                       <Subtitle text={line.text} />
                     </Series.Sequence>
                   ))}

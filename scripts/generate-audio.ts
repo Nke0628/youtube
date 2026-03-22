@@ -126,11 +126,8 @@ async function main() {
         }
       }
 
-      // セリフの表示フレーム数を計算
-      const contentDuration = videoDuration
-        ? Math.max(audioDuration, videoDuration)
-        : audioDuration;
-      const frames = Math.ceil((contentDuration + MARGIN_SECONDS) * FPS);
+      // セリフの表示フレーム数を計算（音声基準。動画背景の延長はコンポーネント側で処理）
+      const frames = Math.ceil((audioDuration + MARGIN_SECONDS) * FPS);
       totalFrames += frames;
 
       processedLines.push({
