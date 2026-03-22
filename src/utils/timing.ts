@@ -4,16 +4,9 @@ export const FPS = 30;
 export const MARGIN_SECONDS = 0.3;
 export const MOUTH_TOGGLE_INTERVAL = 5; // 5フレームごとに口を切り替え
 
-// セリフ1行の表示フレーム数を計算
+// セリフ1行の表示フレーム数を計算（常に音声の長さ基準）
 export function calculateLineDurationInFrames(line: ProcessedDialogueLine): number {
-  const audioDuration = line.audioDurationInSeconds;
-
-  if (line.background.type === "video" && line.videoDurationInSeconds) {
-    const contentDuration = Math.max(audioDuration, line.videoDurationInSeconds);
-    return Math.ceil((contentDuration + MARGIN_SECONDS) * FPS);
-  }
-
-  return Math.ceil((audioDuration + MARGIN_SECONDS) * FPS);
+  return Math.ceil((line.audioDurationInSeconds + MARGIN_SECONDS) * FPS);
 }
 
 // 音声再生中かどうかを判定

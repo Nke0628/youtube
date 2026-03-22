@@ -7,9 +7,13 @@ import { Zundamon } from "./Zundamon";
 
 interface DialogueLineProps {
   line: ProcessedDialogueLine;
+  videoStartFromFrame?: number;
 }
 
-export const DialogueLineComponent: React.FC<DialogueLineProps> = ({ line }) => {
+export const DialogueLineComponent: React.FC<DialogueLineProps> = ({
+  line,
+  videoStartFromFrame = 0,
+}) => {
   return (
     <div
       style={{
@@ -21,7 +25,7 @@ export const DialogueLineComponent: React.FC<DialogueLineProps> = ({ line }) => 
       {/* 背景 */}
       <Background
         source={line.background}
-        audioDurationInSeconds={line.audioDurationInSeconds}
+        videoStartFromFrame={videoStartFromFrame}
       />
 
       {/* 音声再生 */}

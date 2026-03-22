@@ -61,7 +61,8 @@ async function synthesize(text: string, outputPath: string): Promise<void> {
   if (!queryRes.ok) {
     throw new Error(`音声クエリ作成失敗: ${queryRes.status} ${await queryRes.text()}`);
   }
-  const query = await queryRes.json();
+  const query = await queryRes.json() as Record<string, unknown>;
+  query.speedScale = 1.15;
 
   // 音声合成
   const synthRes = await fetch(

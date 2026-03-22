@@ -1,19 +1,16 @@
 import React from "react";
-import { Img, OffthreadVideo, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
+import { Img, OffthreadVideo, Sequence, staticFile } from "remotion";
 import type { BackgroundSource } from "../types/script";
 
 interface BackgroundProps {
   source: BackgroundSource;
-  audioDurationInSeconds: number;
+  videoStartFromFrame?: number;
 }
 
 export const Background: React.FC<BackgroundProps> = ({
   source,
-  audioDurationInSeconds,
+  videoStartFromFrame = 0,
 }) => {
-  const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
-
   const containerStyle: React.CSSProperties = {
     position: "absolute",
     top: 0,
@@ -39,11 +36,13 @@ export const Background: React.FC<BackgroundProps> = ({
   if (source.type === "video") {
     return (
       <div style={containerStyle}>
-        <OffthreadVideo
-          src={staticFile(source.path)}
-          style={mediaStyle}
-          muted
-        />
+        <Sequence from={-videoStartFromFrame}>
+          <OffthreadVideo
+            src={staticFile(source.path)}
+            style={mediaStyle}
+            muted
+          />
+        </Sequence>
       </div>
     );
   }
