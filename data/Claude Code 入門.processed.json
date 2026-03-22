@@ -6,24 +6,34 @@
       "title": "テストセクション1",
       "lines": [
         {
-          "text": "セクション1テストです。テストです。\n明日もいいね。",
+          "text": "セクション1テストです。hoaw",
           "background": {
             "type": "image",
             "id": "1",
             "path": "backgrounds/Claude Code 入門/1.png"
           },
           "audioFile": "audio/Claude Code 入門/section-0-line-0.wav",
-          "audioDurationInSeconds": 4.330666666666667
+          "audioDurationInSeconds": 2.538666666666667
         },
         {
-          "text": "セクション1テストです。",
+          "text": "hoge",
           "background": {
             "type": "image",
             "id": "1",
             "path": "backgrounds/Claude Code 入門/1.png"
           },
           "audioFile": "audio/Claude Code 入門/section-0-line-1.wav",
-          "audioDurationInSeconds": 1.7706666666666666
+          "audioDurationInSeconds": 0.768
+        },
+        {
+          "text": "fuga",
+          "background": {
+            "type": "image",
+            "id": "1",
+            "path": "backgrounds/Claude Code 入門/1.png"
+          },
+          "audioFile": "audio/Claude Code 入門/section-0-line-2.wav",
+          "audioDurationInSeconds": 0.6613333333333333
         }
       ]
     },
@@ -44,5 +54,5 @@
       ]
     }
   ],
-  "totalDurationInFrames": 518
+  "totalDurationInFrames": 464
 }

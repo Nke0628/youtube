@@ -6,7 +6,7 @@
       "title": "テストセクション1",
       "lines": [
         {
-          "text": "セクション1テストです。テストです。\n明日もいいね。",
+          "text": "セクション1テストです。hoaw",
           "background": {
             "type": "image",
             "id": "1",
@@ -14,7 +14,15 @@
           }
         },
         {
-          "text": "セクション1テストです。",
+          "text": "hoge",
+          "background": {
+            "type": "image",
+            "id": "1",
+            "path": "backgrounds/Claude Code 入門/1.png"
+          }
+        },
+        {
+          "text": "fuga",
           "background": {
             "type": "image",
             "id": "1",

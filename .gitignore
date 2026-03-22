@@ -3,6 +3,9 @@ dist
 .DS_Store
 .env
 
+# 生成されたデータ
+data/
+
 # 生成された音声ファイル
 public/audio/
 

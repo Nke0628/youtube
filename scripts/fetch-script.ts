@@ -108,6 +108,7 @@ async function main() {
     // レベル2ブロック（セリフ）を取得
     const lineBlocks = await getChildren(sectionBlock.id);
     const lines: DialogueLine[] = [];
+    let lastBackground: BackgroundSource = { type: "auto" };
 
     for (const lineBlock of lineBlocks) {
       if (lineBlock.type !== "bulleted_list_item") continue;
@@ -119,7 +120,7 @@ async function main() {
 
       // レベル3ブロック（背景指定）を取得
       const bgBlocks = await getChildren(lineBlock.id);
-      let background: BackgroundSource = { type: "auto" };
+      let background: BackgroundSource | null = null;
 
       for (const bgBlock of bgBlocks) {
         if (bgBlock.type !== "bulleted_list_item") continue;
@@ -130,7 +131,14 @@ async function main() {
         }
       }
 
-      lines.push({ text, background });
+      // 背景指定がない場合は直前のセリフの背景を引き継ぐ
+      if (background) {
+        lastBackground = background;
+      } else {
+        console.log(`    → 背景: 前のセリフから引き継ぎ`);
+      }
+
+      lines.push({ text, background: background ?? lastBackground });
     }
 
     if (lines.length > 0) {
