@@ -1,0 +1,40 @@
+{
+  "id": "Claude Code 入門",
+  "title": "Claude Code 入門",
+  "sections": [
+    {
+      "title": "テストセクション1",
+      "lines": [
+        {
+          "text": "セクション1テストです。テストです。\n明日もいいね。",
+          "background": {
+            "type": "image",
+            "id": "1",
+            "path": "backgrounds/Claude Code 入門/1.png"
+          }
+        },
+        {
+          "text": "セクション1テストです。",
+          "background": {
+            "type": "image",
+            "id": "1",
+            "path": "backgrounds/Claude Code 入門/1.png"
+          }
+        }
+      ]
+    },
+    {
+      "title": "テストセクション2",
+      "lines": [
+        {
+          "text": "セクションテストです。testです。",
+          "background": {
+            "type": "video",
+            "id": "2",
+            "path": "backgrounds/Claude Code 入門/2.mov"
+          }
+        }
+      ]
+    }
+  ]
+}

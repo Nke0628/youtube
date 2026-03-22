@@ -6,28 +6,38 @@
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
+    "@notionhq/client": "^5.14.0",
     "@remotion/cli": "4.0.437",
+    "@remotion/google-fonts": "4.0.437",
+    "@remotion/media-utils": "^4.0.437",
+    "@remotion/tailwind-v4": "4.0.437",
     "@remotion/zod-types": "4.0.437",
+    "dotenv": "^17.3.1",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "remotion": "4.0.437",
-    "zod": "4.3.6",
-    "@remotion/tailwind-v4": "4.0.437",
-    "tailwindcss": "4.0.0"
+    "tailwindcss": "4.0.0",
+    "zod": "4.3.6"
   },
   "devDependencies": {
     "@remotion/eslint-config-flat": "4.0.437",
+    "@types/node": "^25.5.0",
     "@types/react": "19.2.7",
     "@types/web": "0.0.166",
     "eslint": "9.19.0",
     "prettier": "3.8.1",
+    "tsx": "^4.21.0",
     "typescript": "5.9.3"
   },
   "scripts": {
     "dev": "remotion studio",
     "build": "remotion bundle",
     "upgrade": "remotion upgrade",
-    "lint": "eslint src && tsc"
+    "lint": "eslint src && tsc",
+    "fetch-script": "tsx scripts/fetch-script.ts",
+    "generate-audio": "tsx scripts/generate-audio.ts",
+    "prepare": "tsx scripts/prepare.ts",
+    "render": "remotion render src/index.ts ZundamonVideo"
   },
   "sideEffects": [
     "*.css"
